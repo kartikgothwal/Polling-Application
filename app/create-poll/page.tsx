@@ -13,7 +13,7 @@ export default function Create() {
             Create a poll
           </h1>
         </div>
-        <PollForm onSubmit={() => {}} redirectPath={`/dashboard`} />
+        <PollForm redirectPath={`/dashboard`} />
       </div>
     </>
   );

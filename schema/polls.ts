@@ -11,7 +11,7 @@ export const pollValidationSchema = z.object({
   votes: z
     .array(
       z.object({
-        user: z.string(),
+        user: z.instanceof(mongoose.Types.ObjectId),
         optionIndex: z.number(),
         votedAt: z.date().default(() => new Date()),
       })

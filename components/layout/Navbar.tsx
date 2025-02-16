@@ -112,7 +112,6 @@ export const Navbar = () => {
             </Sheet>
           </span>
 
-          {/* desktop */}
           <nav className="hidden md:flex gap-2">
             {routeList.map((route: RouteProps, i) => (
               <Link

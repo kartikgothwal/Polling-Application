@@ -16,7 +16,7 @@ const pollSchema = z.object({
   allowMultiple: z.boolean().default(false),
 });
 
-const PollForm = ({ redirectPath = "", onSubmit }) => {
+const PollForm = ({ redirectPath = "" }) => {
   const router = useRouter();
   const {
     register,
@@ -43,7 +43,7 @@ const PollForm = ({ redirectPath = "", onSubmit }) => {
   );
   const handleAddOption = () => {
     const optionValue = watch("optionInput", "");
-    if (optionValue.trim()) {
+    if ((optionValue as string).trim()) {
       if (debouncedOptions.length < 4) {
         setValue("options", [...debouncedOptions, optionValue], {
           shouldValidate: true,

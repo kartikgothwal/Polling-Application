@@ -27,6 +27,7 @@ import { ToasterError, ToasterSuccess } from "@/utils/Toast";
 import { useRouter } from "next/navigation";
 import { useMutationQueries } from "@/apiquery/useApiQuery";
 import { useEffect } from "react";
+import LoadingSpinner from "../loadingSpinner";
 
 export type SignUpFormSchemaType = z.infer<typeof SignUpFormSchema>;
 
@@ -37,10 +38,12 @@ export function SignUpForm({
   openSignUpModel: boolean;
   setOpenSignupModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { mutate: signUpMutation, isSuccess } = useMutationQueries(
-    "signup",
-    "signup"
-  );
+  const {
+    mutate: signUpMutation,
+    isSuccess,
+    isPending,
+  } = useMutationQueries("signup", "signup");
+  console.log("🚀 ~ isPending:", isPending);
   const router = useRouter();
   const { theme } = useTheme();
   const {
@@ -57,6 +60,7 @@ export function SignUpForm({
         ToasterSuccess(response.data.message, theme!);
         reset();
         setOpenSignupModal(false);
+        router.push("/dashboard");
       },
       onError: (error: unknown) => {
         if (axios.isAxiosError(error) && error.response) {
