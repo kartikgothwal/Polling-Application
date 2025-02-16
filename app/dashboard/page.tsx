@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { IoMdSearch } from "react-icons/io";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import { useGetQueries } from "@/apiquery/useApiQuery";
+import { useGetQueries, useGetRefetchQueries } from "@/apiquery/useApiQuery";
 import PollCard from "@/components/pollCard";
 
 export default function SidebarDemo() {
@@ -55,7 +55,7 @@ export default function SidebarDemo() {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 flex-1 max-w-full mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen"
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 flex-1  max-w-full mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
@@ -91,7 +91,6 @@ export default function SidebarDemo() {
     </div>
   );
 }
-
 export const Logo = () => {
   return (
     <div className="flex flex-row justify-between">
@@ -112,7 +111,6 @@ export const Logo = () => {
     </div>
   );
 };
-
 export const LogoIcon = () => {
   return (
     <Link
@@ -123,7 +121,25 @@ export const LogoIcon = () => {
     </Link>
   );
 };
+export const CreatePost = () => {
+  const router = useRouter();
 
+  return (
+    <>
+      <div className="w-1/4 flex justify-end items-center gap-2">
+        <Button
+          className="p-2"
+          variant={"secondary"}
+          onClick={() => router.push("/create-poll")}
+        >
+          <IoMdAddCircleOutline style={{ height: "1.3em", width: "1.3em" }} />
+          Create Polls
+        </Button>
+        <ModeToggle />
+      </div>
+    </>
+  );
+};
 export const SearchInput = () => {
   return (
     <div className="relative w-1/4">
@@ -136,23 +152,23 @@ export const SearchInput = () => {
     </div>
   );
 };
-
 export const TopBar = () => {
   return (
-    <div className="hidden md:flex justify-between items-center">
-      <SearchInput />
-    </div>
+    <>
+      <div className={`hidden md:flex justify-between items-center`}>
+        <SearchInput />
+        <CreatePost />
+      </div>
+    </>
   );
 };
-
 const Dashboard = () => {
-  const { data: polls, error, isLoading } = useGetQueries("polls", "polls");
-
+  const { data: polls, error, isLoading } = useGetRefetchQueries("polls", "polls", 5000);
+  
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading polls</div>;
-
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 ">
       <div className="p-2 md:p-5 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-4 flex-1 w-full h-full">
         <TopBar />
         <div className="flex gap-2 flex-1 flex-col">

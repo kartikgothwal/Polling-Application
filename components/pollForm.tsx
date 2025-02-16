@@ -39,7 +39,7 @@ const PollForm = ({ redirectPath = "", onSubmit }) => {
 
   const { mutate: createPollMutation } = useMutationQueries(
     "createPoll",
-    "poll"
+    "polls"
   );
   const handleAddOption = () => {
     const optionValue = watch("optionInput", "");

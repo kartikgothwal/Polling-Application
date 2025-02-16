@@ -8,6 +8,17 @@ export const useGetQueries = (queryKey: string, endpoint: string) => {
     queryFn: () => GetRequestHandler(endpoint),
   });
 };
+export const useGetRefetchQueries = (
+  queryKey: string,
+  endpoint: string,
+  refetchTime: number
+) => {
+  return useQuery({
+    queryKey: [queryKey],
+    queryFn: () => GetRequestHandler(endpoint),
+    refetchInterval: refetchTime || 5000,
+  });
+};
 
 export const useMutationQueries = (queryKey: string, endpoint: string) => {
   return useMutation({

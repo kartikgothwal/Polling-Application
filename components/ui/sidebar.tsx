@@ -4,7 +4,7 @@ import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import { CreatePost, SearchInput } from "@/app/dashboard/page";
+import { SearchInput } from "@/app/dashboard/page";
 import { Button } from "./button";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { ModeToggle } from "./mode-toggle";
@@ -113,7 +113,6 @@ const TopBar = () => {
     <>
       <div className={`flex justify-between items-center w-full`}>
         <SearchInput />
-        <CreatePost />
       </div>
     </>
   );
