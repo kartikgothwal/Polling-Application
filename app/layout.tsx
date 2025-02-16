@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ThoughtCanvas",
-  description: "Ideas and thoughts on the web",
+  title: "Polling App",
+  description: "Make you polling work",
 };
 
 async function RootLayout({

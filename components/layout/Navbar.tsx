@@ -86,7 +86,7 @@ export const Navbar = () => {
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
                   {routeList.map(({ href, label }: RouteProps) => (
-                    <a
+                    <Link
                       rel="noreferrer noopener"
                       key={label}
                       href={href}
@@ -94,9 +94,9 @@ export const Navbar = () => {
                       className={buttonVariants({ variant: "ghost" })}
                     >
                       {label}
-                    </a>
+                    </Link>
                   ))}
-                  <a
+                  <Link
                     rel="noreferrer noopener"
                     href="https://github.com/kartikgothwal/thoughtcanvas"
                     target="_blank"
@@ -106,7 +106,7 @@ export const Navbar = () => {
                   >
                     {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
                     Github
-                  </a>
+                  </Link>
                 </nav>
               </SheetContent>
             </Sheet>
@@ -115,7 +115,7 @@ export const Navbar = () => {
           {/* desktop */}
           <nav className="hidden md:flex gap-2">
             {routeList.map((route: RouteProps, i) => (
-              <a
+              <Link
                 rel="noreferrer noopener"
                 href={route.href}
                 key={i}
@@ -124,12 +124,12 @@ export const Navbar = () => {
                 })}`}
               >
                 {route.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           <div className="hidden md:flex gap-2">
-            <a
+            <Link
               rel="noreferrer noopener"
               href="https://github.com/kartikgothwal/thoughtcanvas"
               target="_blank"
@@ -137,7 +137,7 @@ export const Navbar = () => {
             >
               {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
               Github
-            </a>
+            </Link>
 
             <ModeToggle />
           </div>

@@ -16,6 +16,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { IoMdSearch } from "react-icons/io";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import { useGetQueries } from "@/apiquery/useApiQuery";
+import PollCard from "@/components/pollCard";
 
 export default function SidebarDemo() {
   const links = [
@@ -52,7 +55,7 @@ export default function SidebarDemo() {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 flex-1  max-w-full mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen"
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 flex-1 max-w-full mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
@@ -88,6 +91,7 @@ export default function SidebarDemo() {
     </div>
   );
 }
+
 export const Logo = () => {
   return (
     <div className="flex flex-row justify-between">
@@ -102,12 +106,13 @@ export const Logo = () => {
           animate={{ opacity: 1 }}
           className="font-medium text-black dark:text-white whitespace-pre"
         >
-          ThoughCanvas
+          Polling App
         </motion.span>
       </Link>
     </div>
   );
 };
+
 export const LogoIcon = () => {
   return (
     <Link
@@ -118,19 +123,7 @@ export const LogoIcon = () => {
     </Link>
   );
 };
-export const CreatePost = () => {
-  return (
-    <>
-      <div className="w-1/4 flex justify-end items-center gap-2">
-        <Button className="p-2" variant={"secondary"}>
-          <IoMdAddCircleOutline style={{ height: "1.3em", width: "1.3em" }} />
-          Create Post
-        </Button>
-        <ModeToggle />
-      </div>
-    </>
-  );
-};
+
 export const SearchInput = () => {
   return (
     <div className="relative w-1/4">
@@ -143,26 +136,36 @@ export const SearchInput = () => {
     </div>
   );
 };
+
 export const TopBar = () => {
   return (
-    <>
-      <div className={`hidden md:flex justify-between items-center`}>
-        <SearchInput />
-        <CreatePost />
-      </div>
-    </>
+    <div className="hidden md:flex justify-between items-center">
+      <SearchInput />
+    </div>
   );
 };
+
 const Dashboard = () => {
+  const { data: polls, error, isLoading } = useGetQueries("polls", "polls");
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading polls</div>;
+
   return (
-    <div className="flex flex-1 ">
+    <div className="flex flex-1">
       <div className="p-2 md:p-5 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-4 flex-1 w-full h-full">
         <TopBar />
-
         <div className="flex gap-2 flex-1 flex-col">
-          <div className="h-full w-full rounded-lg  bg-gray-100 dark:bg-neutral-800 p-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
-            minus?
+          <div className="h-full w-full rounded-lg bg-gray-100 dark:bg-neutral-800 p-3">
+            {polls?.data?.length > 0 ? (
+              <div className="space-y-4">
+                {polls?.data?.map((poll) => (
+                  <PollCard key={poll.id} poll={poll} />
+                ))}
+              </div>
+            ) : (
+              <p>No polls available</p>
+            )}
           </div>
         </div>
       </div>

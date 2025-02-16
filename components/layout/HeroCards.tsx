@@ -21,14 +21,6 @@ export const HeroCards = () => {
       {/* Testimonial */}
       <Card className="absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
-          {/* <Avatar>
-            <AvatarImage
-              alt=""
-              src="https://github.com/shadcn.png"
-            />
-            <AvatarFallback>SH</AvatarFallback>
-          </Avatar> */}
-
           <div className="flex flex-col">
             <CardTitle className="text-lg">Kartik Gothwal</CardTitle>
             <Link
@@ -40,7 +32,15 @@ export const HeroCards = () => {
           </div>
         </CardHeader>
 
-        <CardContent>Checkout my portfolio</CardContent>
+        <CardContent>
+          {" "}
+          <Link
+            href={"https://kartik-gothwal.vercel.app/"}
+            className="text-[#915eff] underline"
+          >
+            Checkout my portfolio
+          </Link>
+        </CardContent>
       </Card>
 
       {/* Team */}
@@ -53,9 +53,11 @@ export const HeroCards = () => {
             width={100}
             height={100}
           />
-          <CardTitle className="text-center text-[#915eff]">Kartik Gothwal</CardTitle>
+          <CardTitle className="text-center text-[#915eff]">
+            Kartik Gothwal
+          </CardTitle>
           <CardDescription className="font-normal text-primary">
-            Frontend Developer
+            Full Stack Software Developer
           </CardDescription>
         </CardHeader>
 
@@ -68,7 +70,7 @@ export const HeroCards = () => {
 
         <CardFooter>
           <div>
-            <a
+            <Link
               rel="noreferrer noopener"
               href="https://github.com/kartikgothwal"
               target="_blank"
@@ -79,8 +81,8 @@ export const HeroCards = () => {
             >
               <span className="sr-only">Github icon</span>
               {/* <GitHubLogoIcon className="w-5 h-5" /> */}
-            </a>
-            <a
+            </Link>
+            <Link
               rel="noreferrer noopener"
               href="https://twitter.com/KartikGothwal28"
               target="_blank"
@@ -99,9 +101,9 @@ export const HeroCards = () => {
                 <title>X</title>
                 <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
               </svg>
-            </a>
+            </Link>
 
-            <a
+            <Link
               rel="noreferrer noopener"
               href="https://www.linkedin.com/in/kartikgothwal/"
               target="_blank"
@@ -112,7 +114,7 @@ export const HeroCards = () => {
             >
               <span className="sr-only">Linkedin icon</span>
               <Linkedin size="20" />
-            </a>
+            </Link>
           </div>
         </CardFooter>
       </Card>
